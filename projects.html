@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Trainingcqy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        :root {
+            --bg-color: #f7f9fc; --surface-color: #ffffff;
+            --text-primary: #1f1f1f; --text-secondary: #444746;
+            --accent-blue: #c2e7ff; --accent-blue-text: #001d35;
+            --hover-color: #f0f4f8; --sidebar-width: 280px;
+            --border-color: #e0e2e0;
+            --primary-blue: #0b57d0; 
+            --pill-bg: #e8f0fe;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; min-height: 100vh; }
+        
+        .sidebar { width: var(--sidebar-width); padding: 12px; display: flex; flex-direction: column; position: fixed; height: 100vh; border-right: 1px solid transparent; }
+        .logo-area { padding: 16px 24px; font-size: 22px; font-weight: 500; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .nav-item { display: flex; align-items: center; padding: 0 24px; height: 56px; border-radius: 28px; text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 14px; margin-bottom: 4px; transition: background 0.2s; }
+        .nav-item:hover { background-color: var(--hover-color); }
+        .nav-item.active { background-color: var(--accent-blue); color: var(--accent-blue-text); }
+        .nav-item .material-symbols-outlined { margin-right: 16px; font-size: 24px; }
+
+        .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        .projects-container { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 24px; padding-top: 20px; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            cursor: default;
+            will-change: transform, box-shadow;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            opacity: 0; 
+            animation: fadeInUp 0.6s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(11, 87, 208, 0.15);
+            background-color: #fafdff; 
+            border-color: #c2e7ff; 
+            z-index: 2;
+        }
+
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        
+        .project-title { font-size: 22px; font-weight: 400; color: var(--text-primary); transition: color 0.3s; }
+        .project-card:hover .project-title { color: var(--primary-blue); }
+
+        .project-icon { 
+            font-size: 32px; 
+            color: var(--primary-blue); 
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .project-card:hover .project-icon { transform: scale(1.1) rotate(-10deg); }
+
+        .project-desc { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 20px; transition: color 0.2s; }
+        
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+        .tech-pill { 
+            background-color: var(--pill-bg); 
+            color: var(--primary-blue); 
+            padding: 6px 16px; 
+            border-radius: 50px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            transition: all 0.2s;
+        }
+        .project-card:hover .tech-pill { background-color: #d3e3fd; }
+
+        .card-actions { display: flex; gap: 16px; border-top: 1px solid #f0f0f0; padding-top: 16px; transition: border-color 0.2s; }
+        .project-card:hover .card-actions { border-color: #c2e7ff; }
+
+        .action-btn {
+            display: flex; align-items: center; text-decoration: none;
+            color: var(--primary-blue); font-size: 14px; font-weight: 500; gap: 8px;
+            padding: 8px 16px; border-radius: 20px;
+            background-color: transparent;
+            margin-left: -16px;
+            transition: all 0.2s ease;
+            cursor: pointer; 
+        }
+        
+        .action-btn:hover { 
+            background-color: #d3e3fd; 
+            transform: translateX(4px);
+        }
+
+        .action-btn.disabled { color: #8e918f; cursor: not-allowed; background-color: transparent !important; transform: none !important; }
+
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background: var(--surface-color);
+            border-top: 1px solid #e0e0e0;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
+            box-sizing: content-box;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            width: 64px;
+            height: 100%;
+            gap: 4px;
+        }
+
+        .bottom-nav-item.active .icon-container { background-color: var(--accent-blue); color: var(--accent-blue-text); }
+        .bottom-nav-item .icon-container { width: 64px; height: 32px; border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; }
+        .bottom-nav-item:active .icon-container { transform: scale(0.95); }
+        .bottom-nav-item .material-symbols-outlined { font-size: 24px; }
+
+        @media (max-width: 768px) { 
+            .sidebar { display: none; } 
+            .main-content { margin-left: 0; padding: 20px; padding-bottom: 80px; } 
+            .project-title { font-size: 18px; }
+            .bottom-nav { display: flex; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo-area"><span class="material-symbols-outlined" style="color: #0b57d0;">auto_awesome</span><span>Trainingcqy</span></div>
+        <a href="index.html" class="nav-item"><span class="material-symbols-outlined">home</span>首页 Overview</a>
+        <a href="#" class="nav-item active"><span class="material-symbols-outlined">folder_open</span>项目 Projects</a>
+        <a href="gallery.html" class="nav-item"><span class="material-symbols-outlined">photo_library</span>摄影 Gallery</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="projects-container">
+            
+            <!-- Project 1: AI Monitor -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3 class="project-title">AI-Driven Tech Sentiment Monitor</h3>
+                    <span class="material-symbols-outlined project-icon">smart_toy</span>
+                </div>
+                <p class="project-desc">
+                    基于 DeepSeek-V3 LLM 与 N8n 的全自动化 ETL 数据工程系统。实时抓取 Hacker News & TechCrunch，自动清洗、翻译、分类并进行情感分析。
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-pill">N8n Workflow</span>
+                    <span class="tech-pill">DeepSeek API</span>
+                    <span class="tech-pill">Docker</span>
+                    <span class="tech-pill">PostgreSQL</span>
+                    <span class="tech-pill">Metabase</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://techdashboard.trainingcqy.com/" target="_blank" class="action-btn">
+                        <span class="material-symbols-outlined">open_in_new</span>Live Demo
+                    </a>
+                    <a href="#" onclick="showComingSoon(event)" class="action-btn">
+                        <span class="material-symbols-outlined">code</span>Source
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Personal Hub -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3 class="project-title">Personal Digital Hub</h3>
+                    <span class="material-symbols-outlined project-icon">web</span>
+                </div>
+                <p class="project-desc">
+                    基于 Material Design 3 风格设计的个人数字化基地。纯 HTML/CSS 构建，托管于 Cloudflare Pages，实现全球 CDN 加速。
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-pill">HTML5/CSS3</span>
+                    <span class="tech-pill">Cloudflare Pages</span>
+                    <span class="tech-pill">GitOps</span>
+                </div>
+                <div class="card-actions">
+                    <a href="index.html" class="action-btn"><span class="material-symbols-outlined">visibility</span>View Site</a>
+                    <a href="https://github.com/Trainingdlu/Portfolio" target="_blank" class="action-btn">
+                        <span class="material-symbols-outlined">code</span>Source
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3: Alien Game -->
+            <div class="project-card">
+                <div class="card-header">
+                    <h3 class="project-title">Python Alien Invasion Game</h3>
+                    <span class="material-symbols-outlined project-icon">sports_esports</span>
+                </div>
+                <p class="project-desc">
+                    基于 Python Pygame 开发的经典外星人射击游戏。实现飞船控制、实时记分系统及OOP封装实践。
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-pill">Python 3</span>
+                    <span class="tech-pill">Pygame</span>
+                    <span class="tech-pill">OOP</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://github.com/Trainingdlu/Alien_Invasion" target="_blank" class="action-btn">
+                        <span class="material-symbols-outlined">code</span>Source Code
+                    </a>
+                    <a href="#" onclick="showComingSoon(event)" class="action-btn">
+                        <span class="material-symbols-outlined">desktop_windows</span>PC Only
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <div class="icon-container"><span class="material-symbols-outlined">home</span></div>
+            <span>首页</span>
+        </a>
+        <a href="#" class="bottom-nav-item active">
+            <div class="icon-container"><span class="material-symbols-outlined">folder_open</span></div>
+            <span>项目</span>
+        </a>
+        <a href="gallery.html" class="bottom-nav-item">
+            <div class="icon-container"><span class="material-symbols-outlined">photo_library</span></div>
+            <span>摄影</span>
+        </a>
+    </nav>
+
+    <div id="md-dialog-overlay" class="dialog-overlay" onclick="closeDialog()">
+        <div class="dialog-box" onclick="event.stopPropagation()">
+            <span class="material-symbols-outlined dialog-icon">engineering</span>
+            <p class="dialog-content">
+                该功能模块正在开发中，即将上线。<br>
+                This feature is currently under construction.
+            </p>
+            <div class="dialog-actions">
+                <button class="dialog-btn" onclick="closeDialog()">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .dialog-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s;
+            backdrop-filter: blur(2px);
+        }
+        .dialog-overlay.open { opacity: 1; visibility: visible; }
+
+        .dialog-box {
+            background: #ffffff;
+            width: 90%; max-width: 320px;
+            padding: 24px;
+            border-radius: 28px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
+            transform: scale(0.9); transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .dialog-overlay.open .dialog-box { transform: scale(1); }
+
+        .dialog-icon { font-size: 32px; color: #0b57d0; margin-bottom: 16px; }
+        .dialog-title { font-size: 20px; color: #1f1f1f; margin-bottom: 12px; font-weight: 500; }
+        .dialog-content { font-size: 14px; color: #444746; line-height: 1.5; margin-bottom: 24px; }
+
+        .dialog-actions { width: 100%; display: flex; justify-content: flex-end; }
+        .dialog-btn {
+            background: none; border: none;
+            color: #0b57d0; font-size: 14px; font-weight: 500;
+            padding: 10px 24px; border-radius: 20px;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .dialog-btn:hover { background: rgba(11, 87, 208, 0.08); }
+    </style>
+
+    <script>
+        function showComingSoon(event) {
+            if(event) event.preventDefault();
+            document.getElementById('md-dialog-overlay').classList.add('open');
+        }
+        function closeDialog() {
+            document.getElementById('md-dialog-overlay').classList.remove('open');
+        }
+    </script>
+</body>
+</html>
