@@ -80,9 +80,10 @@
             transition: transform 0.1s;
         }
     
-        .chip:focus {
-            background-color: var(--surface-color); 
-            outline: none;
+        .chip:focus:not(:active) {
+            background-color: var(--surface-color) !important;
+            border-color: #c4c7c5 !important;
+            box-shadow: none !important;
         }
 
         .chip .material-symbols-outlined {font-size: 18px; margin-right: 8px; color: #0b57d0; }
@@ -200,9 +201,11 @@
     </nav>
     <script>
         function copyEmail() {
-            if (document.activeElement instanceof HTMLElement) {
-                document.activeElement.blur();
-            }
+            setTimeout(() => {
+                if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur();
+                }
+            }, 50);
 
             const email = "trainingcqy@gmail.com";
             const label = document.getElementById('email-label');
@@ -215,7 +218,7 @@
                 setTimeout(() => {
                     label.innerText = originalText;
                     label.style.color = ""; 
-                }, 800);
+                }, 1000);
             
             }).catch(err => {
                 console.error('复制失败', err);
