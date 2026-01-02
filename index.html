@@ -9,6 +9,21 @@
     <style>
         * { -webkit-tap-highlight-color: transparent; }
 
+        .chip, 
+        .project-card, 
+        .action-btn, 
+        .nav-item, 
+        .bottom-nav-item,
+        .photo-card {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            
+            -webkit-touch-callout: none;
+            cursor: pointer;
+        }
+
         :root {
             --bg-color: #f7f9fc; --surface-color: #ffffff;
             --text-primary: #1f1f1f; --text-secondary: #444746;
@@ -65,8 +80,6 @@
             white-space: nowrap;
             transition: transform 0.1s; 
             cursor: pointer;
-            user-select: none; 
-           -webkit-user-select: none; 
         }
 
         @media (hover: hover) {
@@ -213,13 +226,23 @@
                     const newBtn = btn.cloneNode(true);
                     btn.parentNode.replaceChild(newBtn, btn);
                     
-                }, 1100);
+                }, 1050);
                 
             }).catch(err => {
                 console.error('复制失败', err);
                 window.location.href = "mailto:" + email;
             });
         }
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                const chips = document.querySelectorAll('.chip');
+                chips.forEach(function(btn) {
+                    btn.blur();
+                    btn.style.backgroundColor = "";
+                    btn.style.borderColor = "";
+                });
+            }
+        });
     </script>
 </body>
 </html>
