@@ -17,6 +17,7 @@
 
 ## 目录结构
 
+```text
 .
 ├── index.html        # 首页 (个人概览/入口)
 ├── projects.html     # 项目展示页 (含 GitHub 跳转与弹窗交互)
@@ -24,6 +25,8 @@
 ├── img.py            # 图像处理自动化脚本
 ├── img/              # 静态资源目录
 └── README.md         # 项目说明文档
+```
+
 
 ## 自动化工作流 (Image Optimization)
 
