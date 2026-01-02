@@ -63,7 +63,10 @@
             font-weight: 500;
             font-size: 13px;
             white-space: nowrap;
-            transition: all 0.2s;
+            transition: transform 0.1s; 
+            cursor: pointer;
+            user-select: none; 
+           -webkit-user-select: none; 
         }
 
         @media (hover: hover) {
@@ -77,13 +80,6 @@
         .chip:active {
             background-color: #e0e4e8; 
             transform: scale(0.96);    
-            transition: transform 0.1s;
-        }
-    
-        .chip:focus:not(:active) {
-            background-color: var(--surface-color) !important;
-            border-color: #c4c7c5 !important;
-            box-shadow: none !important;
         }
 
         .chip .material-symbols-outlined {font-size: 18px; margin-right: 8px; color: #0b57d0; }
@@ -206,9 +202,6 @@
             const email = "trainingcqy@gmail.com";
             const originalText = "联系";
     
-            btn.style.backgroundColor = "var(--surface-color)";
-            btn.style.borderColor = "#c4c7c5";
-    
             navigator.clipboard.writeText(email).then(() => {
                 label.innerText = "已复制";
                 label.style.color = "#0b57d0";
@@ -216,10 +209,11 @@
                 setTimeout(() => {
                     label.innerText = originalText;
                     label.style.color = ""; 
+
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
                     
-                    btn.style.backgroundColor = "";
-                    btn.style.borderColor = "";
-                }, 800);
+                }, 1100);
                 
             }).catch(err => {
                 console.error('复制失败', err);
