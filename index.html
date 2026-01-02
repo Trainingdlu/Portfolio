@@ -172,7 +172,7 @@
             <a href="gallery.html" class="chip">
                 <span class="material-symbols-outlined">photo_camera</span>摄影
             </a>
-	    <a href="javascript:void(0);" onclick="copyEmail()" class="chip">
+	    <a id="contact-btn" onclick="copyEmail()" class="chip" style="cursor: pointer;">
                 <span class="material-symbols-outlined">mail</span>
 		<span id="email-label">联系</span>
             </a>
@@ -201,25 +201,26 @@
     </nav>
     <script>
         function copyEmail() {
-            setTimeout(() => {
-                if (document.activeElement instanceof HTMLElement) {
-                    document.activeElement.blur();
-                }
-            }, 50);
-
-            const email = "trainingcqy@gmail.com";
+            const btn = document.getElementById('contact-btn');
             const label = document.getElementById('email-label');
+            const email = "trainingcqy@gmail.com";
             const originalText = "联系";
-
+    
+            btn.style.backgroundColor = "var(--surface-color)";
+            btn.style.borderColor = "#c4c7c5";
+    
             navigator.clipboard.writeText(email).then(() => {
                 label.innerText = "已复制";
                 label.style.color = "#0b57d0";
-            
+                
                 setTimeout(() => {
                     label.innerText = originalText;
                     label.style.color = ""; 
-                }, 1000);
-            
+                    
+                    btn.style.backgroundColor = "";
+                    btn.style.borderColor = "";
+                }, 800);
+                
             }).catch(err => {
                 console.error('复制失败', err);
                 window.location.href = "mailto:" + email;
