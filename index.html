@@ -150,8 +150,9 @@
             <a href="gallery.html" class="chip">
                 <span class="material-symbols-outlined">photo_camera</span>摄影
             </a>
-            <a href="mailto:trainingcqy@gmail.com" class="chip">
-                <span class="material-symbols-outlined">mail</span>联系
+	    <a href="javascript:void(0);" onclick="copyEmail()" class="chip">
+                <span class="material-symbols-outlined">mail</span>
+		<span id="email-label">联系</span>
             </a>
         </div>
     </main>
@@ -176,5 +177,26 @@
             <span>摄影</span>
         </a>
     </nav>
+    <script>
+        function copyEmail() {
+            const email = "trainingcqy@gmail.com"; 
+            const label = document.getElementById('email-label');
+            const originalText = "联系";
+
+            navigator.clipboard.writeText(email).then(() => {
+                label.innerText = "已复制";
+                label.style.color = "#0b57d0"; // 变成谷歌蓝
+            
+                setTimeout(() => {
+                    label.innerText = originalText;
+                    label.style.color = "";
+                }, 2000);
+            
+            }).catch(err => {
+                console.error('复制失败，尝试打开客户端', err);
+                window.location.href = "mailto:" + email;
+            });
+        }
+    </script>
 </body>
 </html>
