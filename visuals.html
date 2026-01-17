@@ -55,8 +55,8 @@
             scaleMobile: 1.00,
             color: 0x111111,
             shininess: 75.00,
-            waveHeight: 25.00,
-            waveSpeed: 0.65,
+            waveHeight: 20.00,
+            waveSpeed: 0.6,
             zoom: 0.75
         });
 
@@ -73,7 +73,7 @@
         
         window.addEventListener("deviceorientation", (event) => {
 
-            const sensitivity = 5; 
+            const sensitivity = 10; 
 
             let fakeMouseX = (event.gamma * sensitivity) * 10 + (window.innerWidth / 2);
 
