@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trainingcqy | Data Intelligence Hub</title>
+    <title>Overview | Trainingcqy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
@@ -30,6 +33,7 @@
             --accent-blue: #c2e7ff; --accent-blue-text: #001d35;
             --hover-color: #f0f4f8; --sidebar-width: 280px;
         }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; min-height: 100vh; }
         
@@ -53,8 +57,26 @@
 
         .profile-section { text-align: center; margin-bottom: 32px; }
         .avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 1px solid #e0e0e0; background: white; padding: 4px;}
-        .user-name { font-size: 28px; font-weight: 400; margin-bottom: 4px; color: var(--text-primary); }
-        .user-email { color: var(--text-secondary); font-size: 15px; }
+        .user-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            font-weight: 400;
+            margin-bottom: 4px;
+            line-height: 1.1;
+        }
+
+        .secret-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .secret-link:hover {
+            color: #0b57d0;
+            text-shadow: 0 0 15px rgba(11, 87, 208, 0.4);
+            cursor: pointer;
+        }
 
         .action-grid {
             display: flex;
@@ -64,6 +86,7 @@
             width: 100%;
             overflow-x: auto;
             padding-bottom: 4px;
+	    margin-top: 30px;
         }
 
         .chip {
@@ -80,6 +103,7 @@
             white-space: nowrap;
             transition: transform 0.1s; 
             cursor: pointer;
+	    font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
         }
 
         @media (hover: hover) {
@@ -165,11 +189,14 @@
     </nav>
 
     <main class="main-content">
+        
         <div class="profile-section">
-            <img src="img/avatar.webp" onerror="this.src='https://ui-avatars.com/api/?name=TC&background=0b57d0&color=fff'" alt="Avatar" class="avatar">
-            <h1 class="user-name">Trainingcqy</h1>
-            <p class="user-email">trainingcqy@gmail.com</p>
-        </div>
+            <a href="#" style="text-decoration: none;">
+                <img src="img/avatar.webp" onerror="this.src='https://ui-avatars.com/api/?name=TC&background=0b57d0&color=fff'" alt="Avatar" class="avatar">
+            </a>
+
+            <h1 class="user-name">
+                <a href="visuals.html" class="secret-link">Trainingcqy</a>
 
         <div class="action-grid">
 	    <a href="https://dashboard.trainingcqy.com/" target="_blank" class="chip">

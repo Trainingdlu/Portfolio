@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immersive Flow</title>
+    <style>
+      .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 10;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        border-radius: 20px;
+        }
+
+    .back-btn:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(5px);
+        }
+        body { margin: 0; overflow: hidden; background: #000; }
+        #vanta-canvas { width: 100vw; height: 100vh; display: block; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">
+        <span>Exit</span>
+    </a>
+
+    <div id="vanta-canvas"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
+
+    <script>
+        const vantaEffect = VANTA.WAVES({
+            el: "#vanta-canvas",
+            
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: true,
+            
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            
+            color: 0x111111,
+            
+            shininess: 75.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.7,
+            zoom: 0.75
+        });
+
+        const colorHelper = new THREE.Color();
+        let hue = 0;
+
+        let animationId;
+
+        function animateLoop() {
+            hue += 0.0005; 
+            if (hue > 1) hue = 0;
+
+            colorHelper.setHSL(hue, 0.6, 0.15);
+            vantaEffect.setOptions({ color: colorHelper.getHex() });
+
+            animationId = requestAnimationFrame(animateLoop);
+        }
+
+        animateLoop();
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationId);
+            } else {
+                animateLoop();
+            }
+        });
+
+    </script>
+</body>
+</html>

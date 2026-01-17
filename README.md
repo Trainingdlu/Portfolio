@@ -22,6 +22,7 @@
 ├── index.html        # 首页 (个人概览/入口)
 ├── projects.html     # 项目展示页 (含 GitHub 跳转与弹窗交互)
 ├── gallery.html      # 摄影图库 (纯 CSS 瀑布流布局)
+├── visuals.html      # 视觉效果
 ├── img.py            # 图像处理自动化脚本
 ├── img/              # 静态资源目录
 └── README.md         # 项目说明文档
