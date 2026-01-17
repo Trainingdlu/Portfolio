@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immersive Flow</title>
     <style>
+      * { -webkit-tap-highlight-color: transparent; }
+      body { margin: 0; overflow: hidden; background: #000; }
+      
       .back-btn {
         position: absolute;
         top: 20px;
         left: 20px;
         z-index: 10;
         text-decoration: none;
-        color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0.5);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -20,15 +23,14 @@
         transition: all 0.3s ease;
         padding: 8px 16px;
         border-radius: 20px;
-        }
-
-    .back-btn:hover {
+      }
+      .back-btn:hover {
         color: rgba(255, 255, 255, 1);
         background: rgba(255, 255, 255, 0.25);
         backdrop-filter: blur(5px);
-        }
-        body { margin: 0; overflow: hidden; background: #000; }
-        #vanta-canvas { width: 100vw; height: 100vh; display: block; }
+      }
+
+      #vanta-canvas { width: 100vw; height: 100vh; display: block; }
     </style>
 </head>
 <body>
@@ -42,49 +44,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
 
     <script>
+        // 1. 初始化 Vanta
         const vantaEffect = VANTA.WAVES({
             el: "#vanta-canvas",
-            
             mouseControls: true,
             touchControls: true,
-            gyroControls: true,
-            
+            gyroControls: false,
             minHeight: 200.00,
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            
             color: 0x111111,
-            
             shininess: 75.00,
-            waveHeight: 15.00,
-            waveSpeed: 0.7,
+            waveHeight: 25.00,
+            waveSpeed: 0.6,
             zoom: 0.75
         });
 
         const colorHelper = new THREE.Color();
         let hue = 0;
-
-        let animationId;
-
         function animateLoop() {
             hue += 0.0005; 
             if (hue > 1) hue = 0;
-
             colorHelper.setHSL(hue, 0.6, 0.15);
             vantaEffect.setOptions({ color: colorHelper.getHex() });
-
-            animationId = requestAnimationFrame(animateLoop);
+            requestAnimationFrame(animateLoop);
         }
-
         animateLoop();
+        
+        window.addEventListener("deviceorientation", (event) => {
 
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                cancelAnimationFrame(animationId);
-            } else {
-                animateLoop();
-            }
+            const sensitivity = 3.0; 
+
+            let fakeMouseX = (event.gamma * sensitivity) * 10 + (window.innerWidth / 2);
+
+            let fakeMouseY = (event.beta * sensitivity) * 10 + (window.innerHeight / 2);
+
+            document.dispatchEvent(new MouseEvent("mousemove", {
+                clientX: fakeMouseX,
+                clientY: fakeMouseY,
+                bubbles: true
+            }));
         });
 
     </script>
