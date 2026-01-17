@@ -2,38 +2,30 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Immersive Flow</title>
     <style>
-      * { -webkit-tap-highlight-color: transparent; }
-      body { margin: 0; overflow: hidden; background: #000; }
-      
-      .back-btn {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 10;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.5);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        font-family: 'Roboto', sans-serif;
-        transition: all 0.3s ease;
-        padding: 8px 16px;
-        border-radius: 20px;
-      }
-      .back-btn:hover {
-        color: rgba(255, 255, 255, 1);
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(5px);
-      }
-
-      #vanta-canvas { width: 100vw; height: 100vh; display: block; }
+        body { margin: 0; overflow: hidden; background: #000; }
+        #vanta-canvas { width: 100vw; height: 100vh; display: block; }
+        
+        .back-btn {
+            position: absolute; top: 20px; left: 20px; z-index: 10;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0);
+            display: flex; align-items: center; gap: 8px;
+            font-size: 14px; font-family: sans-serif;
+            padding: 8px 16px; border-radius: 20px;
+            background: rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+
     <a href="index.html" class="back-btn">
         <span>Exit</span>
     </a>
@@ -44,49 +36,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
 
     <script>
-        // 1. 初始化 Vanta
         const vantaEffect = VANTA.WAVES({
             el: "#vanta-canvas",
+            
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
+            
             minHeight: 200.00,
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
             color: 0x111111,
-            shininess: 75.00,
-            waveHeight: 25.00,
-            waveSpeed: 0.6,
+            shininess: 80.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.7,
             zoom: 0.75
         });
 
         const colorHelper = new THREE.Color();
         let hue = 0;
+        let animationId;
+
         function animateLoop() {
             hue += 0.0005; 
             if (hue > 1) hue = 0;
+
             colorHelper.setHSL(hue, 0.6, 0.15);
             vantaEffect.setOptions({ color: colorHelper.getHex() });
-            requestAnimationFrame(animateLoop);
+
+            animationId = requestAnimationFrame(animateLoop);
         }
         animateLoop();
-        
-        window.addEventListener("deviceorientation", (event) => {
 
-            const sensitivity = 3.0; 
-
-            let fakeMouseX = (event.gamma * sensitivity) * 10 + (window.innerWidth / 2);
-
-            let fakeMouseY = (event.beta * sensitivity) * 10 + (window.innerHeight / 2);
-
-            document.dispatchEvent(new MouseEvent("mousemove", {
-                clientX: fakeMouseX,
-                clientY: fakeMouseY,
-                bubbles: true
-            }));
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationId);
+            } else {
+                animateLoop();
+            }
         });
 
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener("deviceorientation", function(event) {
+                if (event.gamma === null) return;
+
+                
+                if (vantaEffect.camera) {
+                    const sensitivity = 0.03;
+
+                    vantaEffect.camera.rotation.y = -(event.gamma * sensitivity);
+                    vantaEffect.camera.rotation.x = -(event.beta * sensitivity);
+                }
+            }, true);
+        }
     </script>
 </body>
 </html>
