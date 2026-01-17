@@ -71,30 +71,30 @@
         }
         animateLoop();
                 
-        const SENSITIVITY = 35;
-        const BETA_OFFSET = 15;
+        const SENSITIVITY_X = 20; 
         
-        let currentX = window.innerWidth / 2;
-        let currentY = window.innerHeight / 2;
+        const BETA_MIN = 0;  
+        const BETA_MAX = 60; 
+
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
 
         window.addEventListener("deviceorientation", (event) => {
-            
+            if (!event) return;
+
             const gamma = event.gamma || 0;
             const beta = event.beta || 0;
 
-            let tiltX = gamma * SENSITIVITY;
-            
-            let tiltY = (beta - BETA_OFFSET) * SENSITIVITY;
+            targetX = (window.innerWidth / 2) + (gamma * SENSITIVITY_X);
 
-            let targetX = (window.innerWidth / 2) + tiltX;
-            let targetY = (window.innerHeight / 2) + tiltY;
+            let safeBeta = Math.max(BETA_MIN, Math.min(BETA_MAX, beta));
+            let percentY = (safeBeta - BETA_MIN) / (BETA_MAX - BETA_MIN);
 
-            const clampX = Math.max(-20, Math.min(window.innerWidth + 20, targetX));
-            const clampY = Math.max(-20, Math.min(window.innerHeight + 20, targetY));
+            targetY = window.innerHeight * percentY;
 
             document.dispatchEvent(new MouseEvent("mousemove", {
-                clientX: clampX,
-                clientY: clampY,
+                clientX: targetX,
+                clientY: targetY,
                 bubbles: true
             }));
         });
