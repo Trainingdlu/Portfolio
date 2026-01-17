@@ -89,8 +89,8 @@
             let targetX = (window.innerWidth / 2) + tiltX;
             let targetY = (window.innerHeight / 2) + tiltY;
 
-            const clampX = Math.max(-100, Math.min(window.innerWidth + 100, targetX));
-            const clampY = Math.max(-100, Math.min(window.innerHeight + 100, targetY));
+            const clampX = Math.max(-20, Math.min(window.innerWidth + 20, targetX));
+            const clampY = Math.max(-20, Math.min(window.innerHeight + 20, targetY));
 
             document.dispatchEvent(new MouseEvent("mousemove", {
                 clientX: clampX,
