@@ -7,36 +7,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
     <style>
-        * { -webkit-tap-highlight-color: transparent; }
-
-        .chip, 
-        .project-card, 
-        .action-btn, 
-        .nav-item, 
-        .bottom-nav-item,
-        .photo-card {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            
-            -webkit-touch-callout: none;
-            cursor: pointer;
-        }
-
+        * { -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
             --bg-color: #f7f9fc; --surface-color: #ffffff;
             --text-primary: #1f1f1f; --text-secondary: #444746;
             --accent-blue: #c2e7ff; --accent-blue-text: #001d35;
             --hover-color: #f0f4f8; --sidebar-width: 280px;
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; min-height: 100vh; }
-        
+
+        .chip, .project-card, .action-btn, .nav-item, .bottom-nav-item, .photo-card {
+            -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; cursor: pointer;
+        }
+
         .sidebar { width: var(--sidebar-width); padding: 12px; display: flex; flex-direction: column; position: fixed; height: 100vh; border-right: 1px solid transparent; }
         .logo-area { padding: 16px 24px; font-size: 22px; font-weight: 500; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         .nav-item { display: flex; align-items: center; padding: 0 24px; height: 56px; border-radius: 28px; text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 14px; margin-bottom: 4px; transition: background 0.2s; }
@@ -55,8 +43,13 @@
             min-height: 100vh; 
         }
 
-        .profile-section { text-align: center; margin-bottom: 32px; }
+        .profile-section { 
+            text-align: center; 
+            margin-bottom: 26px; 
+        }
+
         .avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 1px solid #e0e0e0; background: white; padding: 4px;}
+        
         .user-name {
             font-family: 'Great Vibes', cursive;
             font-size: 64px;
@@ -71,12 +64,7 @@
             transition: all 0.5s ease;
             position: relative;
         }
-
-        .secret-link:hover {
-            color: #0b57d0;
-            text-shadow: 0 0 15px rgba(11, 87, 208, 0.4);
-            cursor: pointer;
-        }
+        .secret-link:hover { color: #0b57d0; text-shadow: 0 0 15px rgba(11, 87, 208, 0.4); cursor: pointer; }
 
         .action-grid {
             display: flex;
@@ -86,12 +74,12 @@
             width: 100%;
             overflow-x: auto;
             padding-bottom: 4px;
-	    margin-top: 30px;
         }
 
         .chip {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             padding: 8px 16px;
             background-color: var(--surface-color);
             border: 1px solid #c4c7c5;
@@ -103,73 +91,47 @@
             white-space: nowrap;
             transition: transform 0.1s; 
             cursor: pointer;
-	    font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+            line-height: 1; 
+        }
+
+        .chip .material-symbols-outlined {
+            font-size: 18px; 
+            margin-right: 8px; 
+            color: #0b57d0; 
+            display: block;
+        }
+        
+        .chip span:not(.material-symbols-outlined) {
+            position: relative;
+            top: 1px;
         }
 
         @media (hover: hover) {
-            .chip:hover { 
-                background-color: #f0f4f8; 
-                border-color: #747775; 
-                box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
-            }
+            .chip:hover { background-color: #f0f4f8; border-color: #747775; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         }
-
-        .chip:active {
-            background-color: #e0e4e8; 
-            transform: scale(0.96);    
-        }
-
-        .chip .material-symbols-outlined {font-size: 18px; margin-right: 8px; color: #0b57d0; }
+        .chip:active { background-color: #e0e4e8; transform: scale(0.96); }
 
         .bottom-nav {
             display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 64px;
-            background: var(--surface-color);
-            border-top: 1px solid #e0e0e0;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            padding-bottom: env(safe-area-inset-bottom);
-            box-sizing: content-box;
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 64px;
+            background: var(--surface-color); border-top: 1px solid #e0e0e0;
+            justify-content: space-around; align-items: center; z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom); box-sizing: content-box;
         }
 
         .bottom-nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            width: 64px;
-            height: 100%;
-            gap: 4px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-decoration: none; color: var(--text-secondary); font-size: 12px; font-weight: 500;
+            width: 64px; height: 100%; gap: 4px;
         }
 
-        .bottom-nav-item.active .icon-container {
-            background-color: var(--accent-blue);
-            color: var(--accent-blue-text);
-        }
-
+        .bottom-nav-item.active .icon-container { background-color: var(--accent-blue); color: var(--accent-blue-text); }
         .bottom-nav-item .icon-container {
-            width: 64px;
-            height: 32px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
+            width: 64px; height: 32px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; transition: background-color 0.2s;
         }
-
-        .bottom-nav-item:active .icon-container {
-            transform: scale(0.95);
-        }
-
+        .bottom-nav-item:active .icon-container { transform: scale(0.95); }
         .bottom-nav-item .material-symbols-outlined { font-size: 24px; }
 
         @media (max-width: 768px) { 
@@ -178,6 +140,14 @@
             .action-grid { flex-wrap: wrap; }
             .bottom-nav { display: flex; }
         }
+
+        #rainCanvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9998;
+            pointer-events: none; opacity: 0; visibility: hidden; 
+            transition: opacity 2.8s ease, visibility 2.8s;
+            background: rgba(10, 25, 47, 0.4); backdrop-filter: blur(0.5px);
+        }
+        #rainCanvas.active { opacity: 1; visibility: visible; }
     </style>
 </head>
 <body>
@@ -191,50 +161,49 @@
     <main class="main-content">
         
         <div class="profile-section">
-            <a href="#" style="text-decoration: none;">
+            <a href="javascript:void(0);" onclick="toggleRain()" style="text-decoration: none;">
                 <img src="img/avatar.webp" onerror="this.src='https://ui-avatars.com/api/?name=TC&background=0b57d0&color=fff'" alt="Avatar" class="avatar">
             </a>
 
             <h1 class="user-name">
                 <a href="visuals.html" class="secret-link">Trainingcqy</a>
+            </h1>
+        </div>
 
         <div class="action-grid">
-	    <a href="https://dashboard.trainingcqy.com/" target="_blank" class="chip">
-		<span class="material-symbols-outlined">monitoring</span>科技前沿
-	    </a>
+            <a href="https://dashboard.trainingcqy.com/" target="_blank" class="chip">
+                <span class="material-symbols-outlined">monitoring</span>科技前沿
+            </a>
             <a href="projects.html" class="chip">
                 <span class="material-symbols-outlined">view_quilt</span>项目
             </a>
             <a href="gallery.html" class="chip">
                 <span class="material-symbols-outlined">photo_camera</span>摄影
             </a>
-	    <a id="contact-btn" onclick="copyEmail()" class="chip" style="cursor: pointer;">
+            <a id="contact-btn" onclick="copyEmail()" class="chip" style="cursor: pointer;">
                 <span class="material-symbols-outlined">mail</span>
-		<span id="email-label">联系</span>
+                <span id="email-label">联系</span>
             </a>
         </div>
     </main>
 
     <nav class="bottom-nav">
         <a href="#" class="bottom-nav-item active">
-            <div class="icon-container">
-                <span class="material-symbols-outlined">home</span>
-            </div>
+            <div class="icon-container"><span class="material-symbols-outlined">home</span></div>
             <span>首页</span>
         </a>
         <a href="projects.html" class="bottom-nav-item">
-            <div class="icon-container">
-                <span class="material-symbols-outlined">folder_open</span>
-            </div>
+            <div class="icon-container"><span class="material-symbols-outlined">folder_open</span></div>
             <span>项目</span>
         </a>
         <a href="gallery.html" class="bottom-nav-item">
-            <div class="icon-container">
-                <span class="material-symbols-outlined">photo_library</span>
-            </div>
+            <div class="icon-container"><span class="material-symbols-outlined">photo_library</span></div>
             <span>摄影</span>
         </a>
     </nav>
+
+    <canvas id="rainCanvas"></canvas>
+
     <script>
         function copyEmail() {
             const btn = document.getElementById('contact-btn');
@@ -249,10 +218,9 @@
                 setTimeout(() => {
                     label.innerText = originalText;
                     label.style.color = ""; 
-
                     const newBtn = btn.cloneNode(true);
                     btn.parentNode.replaceChild(newBtn, btn);
-                    
+                    document.getElementById('contact-btn').onclick = copyEmail;
                 }, 1050);
                 
             }).catch(err => {
@@ -260,6 +228,7 @@
                 window.location.href = "mailto:" + email;
             });
         }
+
         window.addEventListener('pageshow', function(event) {
             const chips = document.querySelectorAll('.chip');
             chips.forEach(function(btn) {
@@ -267,6 +236,89 @@
                 btn.style.backgroundColor = "";
                 btn.style.borderColor = "";
             });
+        });
+
+        const canvas = document.getElementById('rainCanvas');
+        const ctx = canvas.getContext('2d');
+        let rainAnimationId;
+        let stopTimeoutId;
+        let drops = [];
+
+        class Drop {
+            constructor() { this.reset(true); }
+            reset(initial = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = initial ? Math.random() * canvas.height : Math.random() * -100;
+                this.z = Math.random(); 
+                this.speed = (this.z * 6) + 6; 
+                this.len = (this.z * 6) + 6;
+                this.width = (this.z * 0.7) + 0.5; 
+                this.opacity = (this.z * 0.25) + 0.1;
+                this.vx = (this.z * 0.5) + 0.5; 
+            }
+            fall() {
+                this.x += this.vx;
+                this.y += this.speed;
+                if (this.y > canvas.height || this.x > canvas.width) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + this.vx, this.y + this.len);
+                ctx.strokeStyle = `rgba(252, 252, 252, ${this.opacity})`;
+                ctx.lineWidth = this.width;
+                ctx.lineCap = 'round'; 
+                ctx.stroke();
+            }
+        }
+
+        function initDrops() {
+            drops = [];
+            const dropCount = Math.floor(window.innerWidth / 2);
+            for (let i = 0; i < dropCount; i++) drops.push(new Drop());
+        }
+
+        function animateRain() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drops.forEach(drop => { drop.fall(); drop.draw(); });
+            rainAnimationId = requestAnimationFrame(animateRain);
+        }
+
+        function toggleRain() {
+            if (canvas.classList.contains('active')) {
+                stopRain();
+            } else {
+                startRain();
+            }
+        }
+
+        function startRain() {
+            if (stopTimeoutId) clearTimeout(stopTimeoutId);
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            if (!rainAnimationId) {
+                initDrops();
+                animateRain();
+            }
+            canvas.classList.add('active');
+        }
+
+        function stopRain() {
+            canvas.classList.remove('active');
+            stopTimeoutId = setTimeout(() => {
+                cancelAnimationFrame(rainAnimationId);
+                rainAnimationId = null;
+            }, 2000);
+        }
+
+        window.addEventListener('resize', () => {
+            if(canvas.classList.contains('active')) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initDrops();
+            }
         });
     </script>
 </body>
