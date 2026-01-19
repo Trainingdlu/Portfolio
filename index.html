@@ -144,8 +144,8 @@
         #rainCanvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9998;
             pointer-events: none; opacity: 0; visibility: hidden; 
-            transition: opacity 2.8s ease, visibility 2.8s;
-            background: rgba(10, 25, 47, 0.4); backdrop-filter: blur(0.5px);
+            transition: opacity 3s ease, visibility 3s;
+            background: rgba(10, 25, 47, 0.4); backdrop-filter: blur(4px);
         }
         #rainCanvas.active { opacity: 1; visibility: visible; }
     </style>
@@ -203,7 +203,7 @@
     </nav>
 
     <canvas id="rainCanvas"></canvas>
-
+        <audio id="bgm" loop preload="none"></audio>
     <script>
         function copyEmail() {
             const btn = document.getElementById('contact-btn');
@@ -240,8 +240,13 @@
 
         const canvas = document.getElementById('rainCanvas');
         const ctx = canvas.getContext('2d');
+        const audio = document.getElementById('bgm');
+        
+        const TARGET_VOLUME = 0.6; 
+
         let rainAnimationId;
         let stopTimeoutId;
+        let fadeInterval;
         let drops = [];
 
         class Drop {
@@ -250,10 +255,10 @@
                 this.x = Math.random() * canvas.width;
                 this.y = initial ? Math.random() * canvas.height : Math.random() * -100;
                 this.z = Math.random(); 
-                this.speed = (this.z * 6) + 6; 
-                this.len = (this.z * 6) + 6;
-                this.width = (this.z * 0.7) + 0.5; 
-                this.opacity = (this.z * 0.25) + 0.1;
+                this.speed = (this.z * 5.5) + 6; 
+                this.len = (this.z * 7) + 7;
+                this.width = (this.z * 0.75) + 0.7; 
+                this.opacity = (this.z * 0.65) + 0.6;
                 this.vx = (this.z * 0.5) + 0.5; 
             }
             fall() {
@@ -265,7 +270,7 @@
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(this.x + this.vx, this.y + this.len);
-                ctx.strokeStyle = `rgba(252, 252, 252, ${this.opacity})`;
+                ctx.strokeStyle = `rgba(174, 194, 224, ${this.opacity})`;
                 ctx.lineWidth = this.width;
                 ctx.lineCap = 'round'; 
                 ctx.stroke();
@@ -292,7 +297,7 @@
             }
         }
 
-        function startRain() {
+    function startRain() {
             if (stopTimeoutId) clearTimeout(stopTimeoutId);
             
             canvas.width = window.innerWidth;
@@ -303,14 +308,38 @@
                 animateRain();
             }
             canvas.classList.add('active');
+                
+            if (!audio.src) {
+                audio.src = "music/Rain after Summer.mp3"; 
+            }
+    
+            if (fadeInterval) clearInterval(fadeInterval);
+    
+            audio.volume = TARGET_VOLUME; 
+            
+            audio.play().catch(() => {});
         }
-
+    
         function stopRain() {
             canvas.classList.remove('active');
+
+            if (fadeInterval) clearInterval(fadeInterval);
+            
+            fadeInterval = setInterval(() => {
+                if (audio.volume > 0.01) {
+                    audio.volume *= 0.9;
+                } else {
+                    clearInterval(fadeInterval);
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.volume = TARGET_VOLUME;
+                }
+            }, 50);
+
             stopTimeoutId = setTimeout(() => {
                 cancelAnimationFrame(rainAnimationId);
                 rainAnimationId = null;
-            }, 2000);
+            }, 3000);
         }
 
         window.addEventListener('resize', () => {
