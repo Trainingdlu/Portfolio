@@ -255,7 +255,7 @@
                 this.x = Math.random() * canvas.width;
                 this.y = initial ? Math.random() * canvas.height : Math.random() * -100;
                 this.z = Math.random(); 
-                this.speed = (this.z * 5.5) + 6; 
+                this.speed = (this.z * 6.5) + 6; 
                 this.len = (this.z * 7) + 7;
                 this.width = (this.z * 0.75) + 0.7; 
                 this.opacity = (this.z * 0.65) + 0.6;
@@ -279,7 +279,7 @@
 
         function initDrops() {
             drops = [];
-            const dropCount = Math.floor(window.innerWidth / 2);
+            const dropCount = Math.floor(window.innerWidth / 4);
             for (let i = 0; i < dropCount; i++) drops.push(new Drop());
         }
 
