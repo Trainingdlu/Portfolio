@@ -1,6 +1,6 @@
-# 个人作品集网站 (Personal Portfolio)
+# 个人网站 Portfolio
 
-基于 Google Material Design 3 (MD3) 设计规范构建的响应式个人主页，用于展示数据分析项目、代码工程能力及摄影作品。
+基于 Google Material Design 3 (MD3) 设计规范构建的响应式个人主页，用于展示项目、工程能力及摄影作品。
 
 **在线访问**: [https://trainingcqy.com](https://trainingcqy.com)
 
