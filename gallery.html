@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Gallery | Trainingcqy</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -19,20 +20,41 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            
             -webkit-touch-callout: none;
             cursor: pointer;
         }
 
         :root {
+            color-scheme: light dark;
             --bg-color: #f7f9fc; 
             --surface-color: #ffffff;
             --text-primary: #1f1f1f; 
             --text-secondary: #444746;
             --accent-blue: #c2e7ff; 
             --accent-blue-text: #001d35;
-            --hover-color: #f0f4f8; 
+            --hover-color: #f0f4f8;
+            --border-color: #e0e0e0;
+            --primary-blue: #0b57d0; 
+            --shadow-normal: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-hover: 0 12px 24px rgba(0,0,0,0.15);
         }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --surface-color: #1e1e1e;
+                --text-primary: #e3e3e3;
+                --text-secondary: #a0a0a0;
+                --accent-blue: #004a77;
+                --accent-blue-text: #c2e7ff;
+                --hover-color: #2c2c2c;
+                --border-color: #333333;
+                --primary-blue: #8ab4f8; 
+                --shadow-normal: 0 4px 6px rgba(0,0,0,0.3);
+                --shadow-hover: 0 12px 24px rgba(0,0,0,0.5);
+            }
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; flex-direction: column; min-height: 100vh; }
         
@@ -41,7 +63,7 @@
             height: 64px; z-index: 20;
             display: flex; align-items: center;
             padding: 0 24px; gap: 8px;
-            background-color: var(--bg-color); 
+            background-color: var(--bg-color);
         }
 
         .logo-area {
@@ -86,10 +108,8 @@
             overflow: hidden; 
             margin-bottom: 20px;
             break-inside: avoid;
-            
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            
+            box-shadow: var(--shadow-normal);
             line-height: 0; 
             display: block;
             cursor: zoom-in;
@@ -97,7 +117,7 @@
 
         .photo-card:hover {
             transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-hover);
             z-index: 2;
         }
 
@@ -116,7 +136,7 @@
             width: 100%;
             height: 64px;
             background: var(--surface-color);
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid var(--border-color);
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
@@ -145,17 +165,17 @@
 
         @media (max-width: 1024px) { .gallery-container { column-count: 2; } } 
         @media (max-width: 768px) { 
-            .main-content { padding: 20px; padding-top: calc(64px + 12px); padding-bottom: 80px; } 
+            .topbar { display: none; }
+            .main-content { padding: 20px; padding-top: 12vh; padding-bottom: 80px; } 
             .gallery-container { column-count: 1; }
             .bottom-nav { display: flex; }
-	    .topbar { display: none; }
         }
     </style>
 </head>
 <body>
     <nav class="topbar">
         <div class="logo-area">
-            <span class="material-symbols-outlined" style="color: #0b57d0;">auto_awesome</span>
+            <span class="material-symbols-outlined" style="color: var(--primary-blue);">auto_awesome</span>
             <span>Trainingcqy</span>
         </div>
         <a href="index.html" class="nav-item"><span class="material-symbols-outlined">home</span>首页</a>
@@ -163,117 +183,38 @@
         <a href="#" class="nav-item active"><span class="material-symbols-outlined">photo_library</span>摄影</a>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="gallery-container">
                         
-            <div class="photo-card">
-                <img src="img/photo_1.webp" loading="lazy" alt="Gallery 1">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_2.webp" loading="lazy" alt="Gallery 2">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_3.webp" loading="lazy" alt="Gallery 3">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_4.webp" loading="lazy" alt="Gallery 4">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_5.webp" loading="lazy" alt="Gallery 5">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_6.webp" loading="lazy" alt="Gallery 6">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_7.webp" loading="lazy" alt="Gallery 7">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_8.webp" loading="lazy" alt="Gallery 8">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_9.webp" loading="lazy" alt="Gallery 9">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_10.webp" loading="lazy" alt="Gallery 10">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_11.webp" loading="lazy" alt="Gallery 11">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_12.webp" loading="lazy" alt="Gallery 12">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_13.webp" loading="lazy" alt="Gallery 13">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_14.webp" loading="lazy" alt="Gallery 14">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_15.webp" loading="lazy" alt="Gallery 15">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_16.webp" loading="lazy" alt="Gallery 16">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_17.webp" loading="lazy" alt="Gallery 17">
-            </div>
-
-            <div class="photo-card">
-                <img src="img/photo_18.webp" loading="lazy" alt="Gallery 18">
-            </div>
-            
-	    <div class="photo-card">
-                <img src="img/photo_19.webp" loading="lazy" alt="Gallery 19">
-            </div>
-            
-	    <div class="photo-card">
-                <img src="img/photo_20.webp" loading="lazy" alt="Gallery 20">
-            </div>
-
-	    <div class="photo-card">
-                <img src="img/photo_21.webp" loading="lazy" alt="Gallery 21">
-            </div>
-
-	    <div class="photo-card">
-                <img src="img/photo_22.webp" loading="lazy" alt="Gallery 22">
-            </div>
-
-	    <div class="photo-card">
-                <img src="img/photo_23.webp" loading="lazy" alt="Gallery 23">
-            </div>
-
-	    <div class="photo-card">
-                <img src="img/photo_24.webp" loading="lazy" alt="Gallery 24">
-            </div>
-
-	    <div class="photo-card">
-                <img src="img/photo_25.webp" loading="lazy" alt="Gallery 25">
-            </div>
-
-	    <div class="photo-card">
-                <img src="img/photo_26.webp" loading="lazy" alt="Gallery 26">
-            </div>
+            <div class="photo-card"><img src="img/photo_1.webp" loading="lazy" alt="Gallery 1"></div>
+            <div class="photo-card"><img src="img/photo_2.webp" loading="lazy" alt="Gallery 2"></div>
+            <div class="photo-card"><img src="img/photo_3.webp" loading="lazy" alt="Gallery 3"></div>
+            <div class="photo-card"><img src="img/photo_4.webp" loading="lazy" alt="Gallery 4"></div>
+            <div class="photo-card"><img src="img/photo_5.webp" loading="lazy" alt="Gallery 5"></div>
+            <div class="photo-card"><img src="img/photo_6.webp" loading="lazy" alt="Gallery 6"></div>
+            <div class="photo-card"><img src="img/photo_7.webp" loading="lazy" alt="Gallery 7"></div>
+            <div class="photo-card"><img src="img/photo_8.webp" loading="lazy" alt="Gallery 8"></div>
+            <div class="photo-card"><img src="img/photo_9.webp" loading="lazy" alt="Gallery 9"></div>
+            <div class="photo-card"><img src="img/photo_10.webp" loading="lazy" alt="Gallery 10"></div>
+            <div class="photo-card"><img src="img/photo_11.webp" loading="lazy" alt="Gallery 11"></div>
+            <div class="photo-card"><img src="img/photo_12.webp" loading="lazy" alt="Gallery 12"></div>
+            <div class="photo-card"><img src="img/photo_13.webp" loading="lazy" alt="Gallery 13"></div>
+            <div class="photo-card"><img src="img/photo_14.webp" loading="lazy" alt="Gallery 14"></div>
+            <div class="photo-card"><img src="img/photo_15.webp" loading="lazy" alt="Gallery 15"></div>
+            <div class="photo-card"><img src="img/photo_16.webp" loading="lazy" alt="Gallery 16"></div>
+            <div class="photo-card"><img src="img/photo_17.webp" loading="lazy" alt="Gallery 17"></div>
+            <div class="photo-card"><img src="img/photo_18.webp" loading="lazy" alt="Gallery 18"></div>
+            <div class="photo-card"><img src="img/photo_19.webp" loading="lazy" alt="Gallery 19"></div>
+            <div class="photo-card"><img src="img/photo_20.webp" loading="lazy" alt="Gallery 20"></div>
+            <div class="photo-card"><img src="img/photo_21.webp" loading="lazy" alt="Gallery 21"></div>
+            <div class="photo-card"><img src="img/photo_22.webp" loading="lazy" alt="Gallery 22"></div>
+            <div class="photo-card"><img src="img/photo_23.webp" loading="lazy" alt="Gallery 23"></div>
+            <div class="photo-card"><img src="img/photo_24.webp" loading="lazy" alt="Gallery 24"></div>
+            <div class="photo-card"><img src="img/photo_25.webp" loading="lazy" alt="Gallery 25"></div>
+            <div class="photo-card"><img src="img/photo_26.webp" loading="lazy" alt="Gallery 26"></div>
         </div>
     </main>
 
-    <!-- Mobile Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="index.html" class="bottom-nav-item">
             <div class="icon-container"><span class="material-symbols-outlined">home</span></div>
