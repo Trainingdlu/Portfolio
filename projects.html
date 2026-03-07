@@ -92,7 +92,11 @@
             transition: background 0.2s; flex-shrink: 0;
             white-space: nowrap;
         }
-        .nav-item:hover { background-color: var(--hover-color); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .nav-item:hover { background-color: var(--hover-color); }
+        }
+        
         .nav-item.active { background-color: var(--accent-blue); color: var(--accent-blue-text); }
         .nav-item .material-symbols-outlined { font-size: 20px; }
 
@@ -123,18 +127,23 @@
         .project-card:nth-child(2) { animation-delay: 0.2s; }
         .project-card:nth-child(3) { animation-delay: 0.3s; }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            background-color: var(--card-hover-bg); 
-            border-color: var(--card-hover-border); 
-            z-index: 2;
+        @media (hover: hover) and (pointer: fine) {
+            .project-card:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--shadow-hover);
+                background-color: var(--card-hover-bg); 
+                border-color: var(--card-hover-border); 
+                z-index: 2;
+            }
         }
 
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
         
         .project-title { font-size: 22px; font-weight: 400; color: var(--text-primary); transition: color 0.3s; }
-        .project-card:hover .project-title { color: var(--primary-blue); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .project-card:hover .project-title { color: var(--primary-blue); }
+        }
 
         .project-icon { 
             font-size: 32px; 
@@ -142,7 +151,9 @@
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        .project-card:hover .project-icon { transform: scale(1.1) rotate(-10deg); }
+        @media (hover: hover) and (pointer: fine) {
+            .project-card:hover .project-icon { transform: scale(1.1) rotate(-10deg); }
+        }
 
         .project-desc { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 20px; transition: color 0.2s; }
         
@@ -156,10 +167,16 @@
             font-weight: 500; 
             transition: all 0.2s;
         }
-        .project-card:hover .tech-pill { background-color: var(--pill-hover-bg); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .project-card:hover .tech-pill { background-color: var(--pill-hover-bg); }
+        }
 
         .card-actions { display: flex; gap: 16px; border-top: 1px solid var(--border-color); padding-top: 16px; transition: border-color 0.2s; }
-        .project-card:hover .card-actions { border-color: var(--card-hover-border); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .project-card:hover .card-actions { border-color: var(--card-hover-border); }
+        }
 
         .action-btn {
             display: flex; align-items: center; text-decoration: none;
@@ -171,7 +188,7 @@
             cursor: pointer;
         }
 
-        @media (hover: hover) {
+        @media (hover: hover) and (pointer: fine) {
             .action-btn:hover {
                 background-color: var(--pill-hover-bg);
                 transform: translateX(4px);
@@ -260,7 +277,10 @@
             padding: 10px 24px; border-radius: 20px;
             cursor: pointer; transition: background 0.2s;
         }
-        .dialog-btn:hover { background: var(--dialog-btn-hover); }
+        
+        @media (hover: hover) and (pointer: fine) {
+            .dialog-btn:hover { background: var(--dialog-btn-hover); }
+        }
     </style>
 </head>
 <body>
@@ -379,6 +399,29 @@
     </div>
 
     <script>
+        function clearActiveStates() {
+            document.body.style.visibility = 'hidden';
+            document.body.offsetHeight;
+            document.body.style.visibility = '';
+        }
+
+        window.addEventListener('pageshow', function (e) {
+            const interactiveElements = document.querySelectorAll('a, button, .action-btn, .nav-item, .bottom-nav-item, .project-card, .dialog-btn');
+            interactiveElements.forEach(el => {
+                if (typeof el.blur === 'function') el.blur();
+            });
+            
+            if (e.persisted) {
+                clearActiveStates();
+            }
+        });
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                clearActiveStates();
+            }
+        });
+
         function showComingSoon(event) {
             if(event) event.preventDefault();
             document.getElementById('md-dialog-overlay').classList.add('open');
