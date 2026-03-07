@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    
     <meta name="color-scheme" content="light dark">
     <title>Gallery | Trainingcqy</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -170,6 +170,10 @@
 
         @media (max-width: 1024px) { .gallery-container { column-count: 2; } } 
         @media (max-width: 768px) { 
+            .photo-card img {
+                -webkit-touch-callout: none;
+                pointer-events: none;
+            }
             .topbar { display: none; }
             .main-content { padding: 20px; padding-top: 24px; padding-bottom: 80px; }
             .gallery-container { column-count: 1; }
