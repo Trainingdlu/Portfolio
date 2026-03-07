@@ -81,7 +81,11 @@
             transition: background 0.2s; flex-shrink: 0;
             white-space: nowrap;
         }
-        .nav-item:hover { background-color: var(--hover-color); }
+
+        @media (hover: hover) and (pointer: fine) {
+            .nav-item:hover { background-color: var(--hover-color); }
+        }
+
         .nav-item.active { background-color: var(--accent-blue); color: var(--accent-blue-text); }
         .nav-item .material-symbols-outlined { font-size: 20px; }
 
@@ -115,10 +119,12 @@
             cursor: zoom-in;
         }
 
-        .photo-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: var(--shadow-hover);
-            z-index: 2;
+        @media (hover: hover) and (pointer: fine) {
+            .photo-card:hover {
+                transform: translateY(-4px) scale(1.01);
+                box-shadow: var(--shadow-hover);
+                z-index: 2;
+            }
         }
 
         .photo-card img {
@@ -186,12 +192,12 @@
     <main class="main-content">
         <div class="gallery-container">
                         
-            <div class="photo-card"><img src="img/photo_1.webp" loading="lazy" alt="Gallery 1"></div>
-            <div class="photo-card"><img src="img/photo_2.webp" loading="lazy" alt="Gallery 2"></div>
-            <div class="photo-card"><img src="img/photo_3.webp" loading="lazy" alt="Gallery 3"></div>
-            <div class="photo-card"><img src="img/photo_4.webp" loading="lazy" alt="Gallery 4"></div>
-            <div class="photo-card"><img src="img/photo_5.webp" loading="lazy" alt="Gallery 5"></div>
-            <div class="photo-card"><img src="img/photo_6.webp" loading="lazy" alt="Gallery 6"></div>
+            <div class="photo-card"><img src="img/photo_1.webp" loading="eager" alt="Gallery 1"></div>
+            <div class="photo-card"><img src="img/photo_2.webp" loading="eager" alt="Gallery 2"></div>
+            <div class="photo-card"><img src="img/photo_3.webp" loading="eager" alt="Gallery 3"></div>
+            <div class="photo-card"><img src="img/photo_4.webp" loading="eager" alt="Gallery 4"></div>
+            <div class="photo-card"><img src="img/photo_5.webp" loading="eager" alt="Gallery 5"></div>
+            <div class="photo-card"><img src="img/photo_6.webp" loading="eager" alt="Gallery 6"></div>
             <div class="photo-card"><img src="img/photo_7.webp" loading="lazy" alt="Gallery 7"></div>
             <div class="photo-card"><img src="img/photo_8.webp" loading="lazy" alt="Gallery 8"></div>
             <div class="photo-card"><img src="img/photo_9.webp" loading="lazy" alt="Gallery 9"></div>
@@ -229,5 +235,30 @@
             <span>摄影</span>
         </a>
     </nav>
+
+    <script>
+        function clearActiveStates() {
+            document.body.style.visibility = 'hidden';
+            document.body.offsetHeight;
+            document.body.style.visibility = '';
+        }
+
+        window.addEventListener('pageshow', function (e) {
+            const interactiveElements = document.querySelectorAll('a, button, .nav-item, .bottom-nav-item, .photo-card, .chip');
+            interactiveElements.forEach(el => {
+                if (typeof el.blur === 'function') el.blur();
+            });
+            
+            if (e.persisted) {
+                clearActiveStates();
+            }
+        });
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                clearActiveStates();
+            }
+        });
+    </script>
 </body>
 </html>
