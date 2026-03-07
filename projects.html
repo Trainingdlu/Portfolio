@@ -28,23 +28,43 @@
             --bg-color: #f7f9fc; --surface-color: #ffffff;
             --text-primary: #1f1f1f; --text-secondary: #444746;
             --accent-blue: #c2e7ff; --accent-blue-text: #001d35;
-            --hover-color: #f0f4f8; --sidebar-width: 280px;
+            --hover-color: #f0f4f8;
             --border-color: #e0e2e0;
             --primary-blue: #0b57d0; 
             --pill-bg: #e8f0fe;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; min-height: 100vh; }
-        
-        .sidebar { width: var(--sidebar-width); padding: 12px; display: flex; flex-direction: column; position: fixed; height: 100vh; border-right: 1px solid transparent; }
-        .logo-area { padding: 16px 24px; font-size: 22px; font-weight: 500; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .nav-item { display: flex; align-items: center; padding: 0 24px; height: 56px; border-radius: 28px; text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 14px; margin-bottom: 4px; transition: background 0.2s; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; flex-direction: column; min-height: 100vh; }
+
+        .topbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 64px; z-index: 20;
+            display: flex; align-items: center;
+            padding: 0 24px; gap: 8px;
+            background-color: var(--bg-color);
+        }
+
+        .logo-area {
+            font-size: 20px; font-weight: 500;
+            color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+            margin-right: 24px; white-space: nowrap;
+        }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 8px;
+            padding: 0 16px; height: 40px; border-radius: 20px;
+            text-decoration: none; color: var(--text-secondary);
+            font-size: 14px; font-weight: 500;
+            transition: background 0.2s; flex-shrink: 0;
+            white-space: nowrap;
+        }
         .nav-item:hover { background-color: var(--hover-color); }
         .nav-item.active { background-color: var(--accent-blue); color: var(--accent-blue-text); }
-        .nav-item .material-symbols-outlined { margin-right: 16px; font-size: 24px; }
+        .nav-item .material-symbols-outlined { font-size: 20px; }
 
-        .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; }
-        .projects-container { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 24px; padding-top: 20px; }
+        .main-content { flex: 1; padding: 40px; padding-top: calc(64px + 20px); display: flex; flex-direction: column; align-items: center; }
+        .projects-container { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 24px; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -169,19 +189,22 @@
         .bottom-nav-item .material-symbols-outlined { font-size: 24px; }
 
         @media (max-width: 768px) { 
-            .sidebar { display: none; } 
-            .main-content { margin-left: 0; padding: 20px; padding-bottom: 80px; } 
+            .main-content { padding: 20px; padding-top: calc(64px + 12px); padding-bottom: 80px; }
             .project-title { font-size: 18px; }
             .bottom-nav { display: flex; }
         }
     </style>
 </head>
 <body>
-    <nav class="sidebar">
-        <div class="logo-area"><span class="material-symbols-outlined" style="color: #0b57d0;">auto_awesome</span><span>Trainingcqy</span></div>
-        <a href="index.html" class="nav-item"><span class="material-symbols-outlined">home</span>首页 Overview</a>
-        <a href="#" class="nav-item active"><span class="material-symbols-outlined">folder_open</span>项目 Projects</a>
-        <a href="gallery.html" class="nav-item"><span class="material-symbols-outlined">photo_library</span>摄影 Gallery</a>
+
+    <nav class="topbar">
+        <div class="logo-area">
+            <span class="material-symbols-outlined" style="color: #0b57d0;">auto_awesome</span>
+            <span>Trainingcqy</span>
+        </div>
+        <a href="index.html" class="nav-item"><span class="material-symbols-outlined">home</span>首页</a>
+        <a href="#" class="nav-item active"><span class="material-symbols-outlined">folder_open</span>项目</a>
+        <a href="gallery.html" class="nav-item"><span class="material-symbols-outlined">photo_library</span>摄影</a>
     </nav>
 
     <main class="main-content">
@@ -217,7 +240,7 @@
                     <span class="material-symbols-outlined project-icon">web</span>
                 </div>
                 <p class="project-desc">
-                    基于 Google 风格设计的个人网站。纯 HTML/CSS 构建，托管于 Cloudflare ，实现全球 CDN 加速。
+                    基于 Google 风格设计的个人网站。纯 HTML/CSS 构建，托管于 Cloudflare 。
                 </p>
                 <div class="tech-stack">
                     <span class="tech-pill">HTML5/CSS3</span>
@@ -286,7 +309,7 @@
             </div>
         </div>
     </div>
-<!-- <a href="#" onclick="showComingSoon(event)" class="action-btn"> -->
+
     <style>
         .dialog-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
