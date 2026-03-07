@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overview | Trainingcqy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +18,34 @@
             --text-primary: #1f1f1f; --text-secondary: #444746;
             --accent-blue: #c2e7ff; --accent-blue-text: #001d35;
             --hover-color: #f0f4f8;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212; 
+                --surface-color: #1e1e1e;
+                --text-primary: #e3e3e3;
+                --text-secondary: #a0a0a0;
+                --accent-blue: #004a77;
+                --accent-blue-text: #c2e7ff;
+                --hover-color: #2c2c2c;
+            }
+        
+            .chip { 
+                border-color: #444; 
+                background-color: var(--surface-color); 
+            }
+            .chip .material-symbols-outlined { 
+                color: #8ab4f8; 
+            }
+            .avatar {
+                border-color: #333;
+                background-color: var(--surface-color);
+            }
+            .secret-link:hover { 
+                color: #8ab4f8; 
+                text-shadow: 0 0 15px rgba(138, 180, 248, 0.4); 
+            }
         }
 
         body { font-family: 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--text-primary); display: flex; flex-direction: column; min-height: 100vh; }
@@ -166,7 +195,7 @@
             width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
-            background: #fff;
+            background:  var(--bg-color);
         }
 
         .topbar       { z-index: 20; }
