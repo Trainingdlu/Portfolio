@@ -298,13 +298,21 @@
             });
         }
 
-        window.addEventListener('pageshow', function(event) {
-            const chips = document.querySelectorAll('.chip');
-            chips.forEach(function(btn) {
-                btn.blur();
-                btn.style.backgroundColor = "";
-                btn.style.borderColor = "";
-            });
+        window.addEventListener('pageshow', function (e) {
+            if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                
+                if (document.activeElement) {
+                    document.activeElement.blur();
+                }
+                
+                const interactiveElements = document.querySelectorAll('a, button, .chip, .action-btn, .bottom-nav-item');
+                interactiveElements.forEach(el => el.blur());
+        
+                document.body.style.opacity = '0.999';
+                setTimeout(function() {
+                    document.body.style.opacity = '1';
+                }, 10);
+            }
         });
 
         const canvas = document.getElementById('rainCanvas');
