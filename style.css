@@ -1,12 +1,10 @@
 /* ===== Common Styles | Trainingcqy Portfolio ===== */
-
 * {
     -webkit-tap-highlight-color: transparent;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 :root {
     color-scheme: light dark;
     --bg-color: #f7f9fc;
@@ -21,7 +19,6 @@
     --chip-border: #c4c7c5;
     --primary-blue: #0b57d0;
 }
-
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #121212;
@@ -37,7 +34,6 @@
         --primary-blue: #8ab4f8;
     }
 }
-
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
@@ -46,9 +42,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-
 /* ===== Top Navigation ===== */
-
 .topbar {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -60,7 +54,6 @@ body {
     gap: 8px;
     background-color: var(--bg-color);
 }
-
 .logo-area {
     font-size: 20px;
     font-weight: 500;
@@ -71,7 +64,6 @@ body {
     margin-right: 24px;
     white-space: nowrap;
 }
-
 .nav-item {
     display: flex;
     align-items: center;
@@ -88,16 +80,13 @@ body {
     white-space: nowrap;
     cursor: pointer;
 }
-
 @media (hover: hover) and (pointer: fine) {
     .nav-item:hover { background-color: var(--hover-color); }
 }
 .nav-item:active { background-color: var(--active-color); }
 .nav-item.active { background-color: var(--accent-blue); color: var(--accent-blue-text); }
 .nav-item .material-symbols-outlined { font-size: 20px; }
-
 /* ===== Bottom Navigation (Mobile) ===== */
-
 .bottom-nav {
     display: none;
     position: fixed;
@@ -111,7 +100,6 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
     box-sizing: content-box;
 }
-
 .bottom-nav-item {
     display: flex;
     flex-direction: column;
@@ -125,12 +113,10 @@ body {
     height: 100%;
     gap: 4px;
 }
-
 .bottom-nav-item.active .icon-container {
     background-color: var(--accent-blue);
     color: var(--accent-blue-text);
 }
-
 .bottom-nav-item .icon-container {
     width: 64px;
     height: 32px;
@@ -140,13 +126,27 @@ body {
     justify-content: center;
     transition: background-color 0.2s;
 }
-
 .bottom-nav-item:active .icon-container { transform: scale(0.95); }
 .bottom-nav-item .material-symbols-outlined { font-size: 24px; }
-
+/* ===== Interaction Protection ===== */
+.chip,
+.project-card,
+.action-btn,
+.nav-item,
+.bottom-nav-item,
+.photo-card {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
 /* ===== Responsive: Mobile ===== */
-
 @media (max-width: 768px) {
+    body {
+        -webkit-user-select: none;
+        user-select: none;
+    }
     .topbar { display: none; }
     .bottom-nav { display: flex; }
 }
