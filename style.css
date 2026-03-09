@@ -41,6 +41,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 /* ===== Top Navigation ===== */
 .topbar {
@@ -128,25 +133,8 @@ body {
 }
 .bottom-nav-item:active .icon-container { transform: scale(0.95); }
 .bottom-nav-item .material-symbols-outlined { font-size: 24px; }
-/* ===== Interaction Protection ===== */
-.chip,
-.project-card,
-.action-btn,
-.nav-item,
-.bottom-nav-item,
-.photo-card {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-}
 /* ===== Responsive: Mobile ===== */
 @media (max-width: 768px) {
-    body {
-        -webkit-user-select: none;
-        user-select: none;
-    }
     .topbar { display: none; }
     .bottom-nav { display: flex; }
 }
