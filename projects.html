@@ -313,6 +313,9 @@
     </div>
 
     <script>
+        document.addEventListener('selectstart', e => e.preventDefault());
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
         function clearActiveStates() {
             document.body.style.visibility = 'hidden';
             document.body.offsetHeight;
