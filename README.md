@@ -13,7 +13,7 @@
 - **浅色/深色主题** — 通过 CSS Variables + `prefers-color-scheme` 自动适配
 - **响应式导航** — 桌面端顶部导航栏，移动端底部导航栏
 - **Canvas 粒子背景** — 首页使用 Canvas 绘制粒子效果，响应鼠标移动
-- **项目卡片** — 悬浮效果、技术栈标签、Live Demo / Source 链接
+- **项目卡片** — 悬浮效果、技术栈标签、Live Demo / Source 等链接
 - **瀑布流图库** — CSS Multi-column 实现
 - **基础 SEO** — Meta Description / Open Graph / Canonical / Sitemap / Robots.txt
 - **图像处理脚本** — Python 脚本批量转 WebP + 缩放 + 增量命名
