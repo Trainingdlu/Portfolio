@@ -13,9 +13,8 @@
 - **浅色/深色主题** — 通过 CSS Variables + `prefers-color-scheme` 自动适配
 - **响应式导航** — 桌面端顶部导航栏，移动端底部导航栏
 - **Canvas 粒子背景** — 首页使用 Canvas 绘制粒子效果，响应鼠标移动
-- **彩蛋** — 点击头像触发下雨动效 + BGM，点击用户名进入视觉效果页
 - **项目卡片** — 悬浮效果、技术栈标签、Live Demo / Source 链接
-- **瀑布流图库** — CSS Multi-column 实现，3/2/1 列响应式
+- **瀑布流图库** — CSS Multi-column 实现
 - **基础 SEO** — Meta Description / Open Graph / Canonical / Sitemap / Robots.txt
 - **图像处理脚本** — Python 脚本批量转 WebP + 缩放 + 增量命名
 
@@ -35,9 +34,9 @@
 
 ```text
 .
-├── index.html          # 首页 — 粒子背景 + 个人概览 + 下雨彩蛋
-├── projects.html       # 项目展示 — 卡片布局 + 技术栈标签
-├── gallery.html        # 摄影图库 — CSS 瀑布流 (26 张作品)
+├── index.html          # 首页 — 个人概览
+├── projects.html       # 项目展示 — 卡片布局
+├── gallery.html        # 摄影图库 — CSS 瀑布流
 ├── visuals.html        # 视觉效果 — Vanta.js Waves 动态背景
 ├── style.css           # 公共样式 — CSS 变量 / 导航组件 / 响应式
 ├── convert_img.py      # 图像处理脚本 — JPG/PNG → WebP 转换 + 缩放
@@ -58,7 +57,7 @@
 
 ```
 index.html (首页)
-  ├── Canvas 粒子背景 (球形分布 + 透明度动画)
+  ├── Canvas 粒子背景
   ├── Rain after summer
   └── Chip 导航 (科技前沿 / 项目 / 摄影 / 联系)
 
@@ -68,7 +67,7 @@ projects.html (项目)
   └── Python Alien Invasion Game
 
 gallery.html (摄影)
-  └── CSS Multi-column 瀑布流 (3→2→1 列响应式)
+  └── CSS Multi-column 瀑布流
 
 visuals.html (视觉效果)
   └── Vanta.js Waves (Three.js + 色相循环 + 陀螺仪适配)
@@ -78,7 +77,7 @@ visuals.html (视觉效果)
 
 `convert_img.py` 用于自动化处理静态图片资源：
 
-1. **格式转换** — 将 `img/` 下的 JPG/PNG 自动转为 WebP (质量 80%)
+1. **格式转换** — 将 `img/` 下的 JPG/PNG 自动转为 WebP
 2. **尺寸限制** — 超过 1600px 宽度的图片自动等比缩放
 3. **增量命名** — 自动检测现有编号，从最大编号 +1 开始命名
 4. **自动清理** — 转换成功后删除原图
