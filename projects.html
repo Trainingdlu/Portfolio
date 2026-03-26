@@ -368,17 +368,21 @@
                     <span class="material-symbols-outlined project-icon">smart_toy</span>
                 </div>
                 <p class="project-desc">
-                    一个科技新闻聚合与分析自动化项目。使用 n8n 编排工作流并结合大语言模型，实现新闻数据的自动抓取、清洗、分类与情感分析，最后通过数据看板进行可视化展示。
-                </p>
+                    利用工作流定时采集 Hacker News 与 TechCrunch 的科技新闻，由 Jina Reader 获取新闻原文，以辅助 LLM 进行摘要生成、情感分析以及分类的结构化处理。并使用 Jina
+                    Embeddings 生成语义向量以支持相似度搜索，统一存入数据库。最终通过 Metabase 仪表盘、邮件日报、Web 端和 Telegram Bot 进行展示与交互。 </p>
                 <div class="tech-stack">
                     <span class="tech-pill">Docker</span>
                     <span class="tech-pill">n8n</span>
                     <span class="tech-pill">PostgreSQL</span>
                     <span class="tech-pill">Metabase</span>
+                    <span class="tech-pill">Agent</span>
                 </div>
                 <div class="card-actions">
                     <a href="https://dashboard.trainingcqy.com/" target="_blank" class="action-btn">
-                        <span class="material-symbols-outlined">open_in_new</span>Live Demo
+                        <span class="material-symbols-outlined">open_in_new</span>Dashboard
+                    </a>
+                    <a href="https://agent.trainingcqy.com/" target="_blank" class="action-btn">
+                        <span class="material-symbols-outlined">smart_toy</span>Agent
                     </a>
                     <a href="https://github.com/Trainingdlu/TechNews_Intelligence" target="_blank" class="action-btn">
                         <span class="material-symbols-outlined">code</span>Source

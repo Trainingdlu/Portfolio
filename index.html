@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="color-scheme" content="light dark">
     <title>Overview | Trainingcqy</title>
     <meta name="description" content="Trainingcqy 的个人主页，展示项目、工程能力与摄影作品">
@@ -15,36 +16,53 @@
     <link rel="apple-touch-icon" href="img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        .topbar { background-color: transparent; }
+        .topbar {
+            background-color: transparent;
+        }
 
         .main-content {
             flex: 1;
             padding: 0 40px 40px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            padding-top: 64px; 
-            position: relative; z-index: 10;
+            padding-top: 64px;
+            position: relative;
+            z-index: 10;
         }
 
         .center-group {
-            display: flex; flex-direction: column;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            transform: translateY(-68px); 
+            transform: translateY(-68px);
         }
 
-        .profile-section { 
-            text-align: center; 
-            margin-bottom: 26px; 
+        .profile-section {
+            text-align: center;
+            margin-bottom: 26px;
         }
 
-        .avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 1px solid var(--border-color); background: var(--surface-color); padding: 4px;}
-        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            padding: 4px;
+        }
+
         .user-name {
             font-family: 'Great Vibes', cursive;
             font-size: 64px;
@@ -59,7 +77,12 @@
             transition: all 0.5s ease;
             position: relative;
         }
-        .secret-link:hover { color: #8ab4f8; text-shadow: 0 0 15px rgba(138, 180, 248, 0.4); cursor: pointer; }
+
+        .secret-link:hover {
+            color: #8ab4f8;
+            text-shadow: 0 0 15px rgba(138, 180, 248, 0.4);
+            cursor: pointer;
+        }
 
         .action-grid {
             display: flex;
@@ -84,16 +107,16 @@
             font-weight: 500;
             font-size: 13px;
             white-space: nowrap;
-            transition: transform 0.1s; 
+            transition: transform 0.1s;
             cursor: pointer;
             font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
-            line-height: 1; 
+            line-height: 1;
         }
 
         .chip .material-symbols-outlined {
-            font-size: 18px; 
-            margin-right: 8px; 
-            color: var(--primary-blue); 
+            font-size: 18px;
+            margin-right: 8px;
+            color: var(--primary-blue);
             display: block;
         }
 
@@ -103,34 +126,63 @@
         }
 
         @media (hover: hover) and (pointer: fine) {
-            .chip:hover { background-color: var(--hover-color); border-color: var(--text-secondary); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+            .chip:hover {
+                background-color: var(--hover-color);
+                border-color: var(--text-secondary);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            }
         }
-        
-        .chip:active { background-color: var(--active-color); transform: scale(0.96); }
+
+        .chip:active {
+            background-color: var(--active-color);
+            transform: scale(0.96);
+        }
 
         #particleCanvas {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
             pointer-events: none;
             background: var(--bg-color);
         }
 
         #rainCanvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9998;
-            pointer-events: none; opacity: 0; visibility: hidden; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
             transition: opacity 3s ease, visibility 3s;
-            background: rgba(10, 25, 47, 0.4); backdrop-filter: blur(4px);
+            background: rgba(10, 25, 47, 0.4);
+            backdrop-filter: blur(4px);
         }
-        #rainCanvas.active { opacity: 1; visibility: visible; }
 
-        @media (max-width: 768px) { 
-            .main-content { padding: 20px; padding-top: 12vh; padding-bottom: 80px; } 
-            .action-grid { flex-wrap: wrap; }
+        #rainCanvas.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+                padding-top: 12vh;
+                padding-bottom: 80px;
+            }
+
+            .action-grid {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <canvas id="particleCanvas"></canvas>
@@ -147,32 +199,34 @@
 
     <main class="main-content">
         <div class="center-group">
-        
-        <div class="profile-section">
-            <a href="javascript:void(0);" onclick="toggleRain()" style="text-decoration: none;">
-                <img src="img/avatar.webp" onerror="this.src='https://ui-avatars.com/api/?name=TC&background=0b57d0&color=fff'" alt="Avatar" class="avatar">
-            </a>
 
-            <h1 class="user-name">
-                <a href="visuals.html" class="secret-link">Trainingcqy</a>
-            </h1>
-        </div>
+            <div class="profile-section">
+                <a href="javascript:void(0);" onclick="toggleRain()" style="text-decoration: none;">
+                    <img src="img/avatar.webp"
+                        onerror="this.src='https://ui-avatars.com/api/?name=TC&background=0b57d0&color=fff'"
+                        alt="Avatar" class="avatar">
+                </a>
 
-        <div class="action-grid">
-            <a href="https://dashboard.trainingcqy.com/" target="_blank" class="chip">
-                <span class="material-symbols-outlined">monitoring</span>科技前沿
-            </a>
-            <a href="projects.html" class="chip">
-                <span class="material-symbols-outlined">view_quilt</span>项目
-            </a>
-            <a href="gallery.html" class="chip">
-                <span class="material-symbols-outlined">photo_camera</span>摄影
-            </a>
-            <a id="contact-btn" onclick="copyEmail()" class="chip" style="cursor: pointer;">
-                <span class="material-symbols-outlined">mail</span>
-                <span id="email-label">联系</span>
-            </a>
-        </div>
+                <h1 class="user-name">
+                    <a href="visuals.html" class="secret-link">Trainingcqy</a>
+                </h1>
+            </div>
+
+            <div class="action-grid">
+                <a href="https://dashboard.trainingcqy.com/" target="_blank" class="chip">
+                    <span class="material-symbols-outlined">monitoring</span>科技前沿
+                </a>
+                <a href="https://agent.trainingcqy.com/" target="_blank" class="chip">
+                    <span class="material-symbols-outlined">smart_toy</span>智能助手
+                </a>
+                <a href="gallery.html" class="chip">
+                    <span class="material-symbols-outlined">photo_camera</span>摄影
+                </a>
+                <a id="contact-btn" onclick="copyEmail()" class="chip" style="cursor: pointer;">
+                    <span class="material-symbols-outlined">mail</span>
+                    <span id="email-label">联系</span>
+                </a>
+            </div>
 
         </div>
     </main>
@@ -205,13 +259,13 @@
         window.addEventListener('pageshow', function (e) {
             const interactiveElements = document.querySelectorAll('a, button, .chip, .bottom-nav-item');
             interactiveElements.forEach(el => el.blur());
-            
+
             if (e.persisted) {
                 clearActiveStates();
             }
         });
 
-        document.addEventListener('visibilitychange', function() {
+        document.addEventListener('visibilitychange', function () {
             if (document.visibilityState === 'visible') {
                 clearActiveStates();
             }
@@ -222,19 +276,19 @@
             const label = document.getElementById('email-label');
             const email = "trainingcqy@gmail.com";
             const originalText = "联系";
-    
+
             navigator.clipboard.writeText(email).then(() => {
                 label.innerText = "已复制";
                 label.style.color = "#0b57d0";
-                
+
                 setTimeout(() => {
                     label.innerText = originalText;
-                    label.style.color = ""; 
+                    label.style.color = "";
                     const newBtn = btn.cloneNode(true);
                     btn.parentNode.replaceChild(newBtn, btn);
                     document.getElementById('contact-btn').onclick = copyEmail;
                 }, 1050);
-                
+
             }).catch(err => {
                 console.error(err);
                 window.location.href = "mailto:" + email;
@@ -244,25 +298,25 @@
         const canvas = document.getElementById('rainCanvas');
         const ctx = canvas.getContext('2d');
         const audio = document.getElementById('bgm');
-        
-        const TARGET_VOLUME = 0.6; 
+
+        const TARGET_VOLUME = 0.6;
 
         let rainAnimationId;
         let stopTimeoutId;
         let fadeInterval;
-        let drops =[];
+        let drops = [];
 
         class Drop {
             constructor() { this.reset(true); }
             reset(initial = false) {
                 this.x = Math.random() * canvas.width;
                 this.y = initial ? Math.random() * canvas.height : Math.random() * -100;
-                this.z = Math.random(); 
-                this.speed = (this.z * 6) + 6; 
+                this.z = Math.random();
+                this.speed = (this.z * 6) + 6;
                 this.len = (this.z * 7) + 7;
-                this.width = (this.z * 0.75) + 0.7; 
+                this.width = (this.z * 0.75) + 0.7;
                 this.opacity = (this.z * 0.65) + 0.6;
-                this.vx = (this.z * 0.5) + 0.5; 
+                this.vx = (this.z * 0.5) + 0.5;
             }
             fall() {
                 this.x += this.vx;
@@ -275,13 +329,13 @@
                 ctx.lineTo(this.x + this.vx, this.y + this.len);
                 ctx.strokeStyle = `rgba(174, 194, 224, ${this.opacity})`;
                 ctx.lineWidth = this.width;
-                ctx.lineCap = 'round'; 
+                ctx.lineCap = 'round';
                 ctx.stroke();
             }
         }
 
         function initDrops() {
-            drops =[];
+            drops = [];
             const dropCount = Math.floor(window.innerWidth / 1.5);
             for (let i = 0; i < dropCount; i++) drops.push(new Drop());
         }
@@ -304,32 +358,32 @@
             if (window.particleSystem) window.particleSystem.hide();
 
             if (stopTimeoutId) clearTimeout(stopTimeoutId);
-            
+
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            
+
             if (!rainAnimationId) {
                 initDrops();
                 animateRain();
             }
             canvas.classList.add('active');
-                
+
             if (!audio.src) {
-                audio.src = "music/Rain after Summer.mp3"; 
+                audio.src = "music/Rain after Summer.mp3";
             }
-    
+
             if (fadeInterval) clearInterval(fadeInterval);
-            audio.volume = TARGET_VOLUME; 
-            audio.play().catch(() => {});
+            audio.volume = TARGET_VOLUME;
+            audio.play().catch(() => { });
         }
-    
+
         function stopRain() {
             canvas.classList.remove('active');
 
             if (window.particleSystem) window.particleSystem.burst();
 
             if (fadeInterval) clearInterval(fadeInterval);
-            
+
             fadeInterval = setInterval(() => {
                 if (audio.volume > 0.01) {
                     audio.volume *= 0.9;
@@ -348,7 +402,7 @@
         }
 
         window.addEventListener('resize', () => {
-            if(canvas.classList.contains('active')) {
+            if (canvas.classList.contains('active')) {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 initDrops();
@@ -357,32 +411,32 @@
 
         (function () {
             const pCanvas = document.getElementById('particleCanvas');
-            const pCtx    = pCanvas.getContext('2d');
+            const pCtx = pCanvas.getContext('2d');
 
             let pW, pH, pCx, pCy;
             let pMouseX = 0, pMouseY = 0;
             let pRotX = 0, pRotY = 0;
 
-            const P_COLORS =['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
+            const P_COLORS = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
 
             const P_CFG = {
-                count:      675,
-                depth:      700,        
+                count: 675,
+                depth: 700,
                 safeRadius: 200,
-                boundary:   1800,
-                rotSpeed:   0.00075,
-                mouseSens:  0.0005,
+                boundary: 1800,
+                rotSpeed: 0.00075,
+                mouseSens: 0.0005,
             };
 
             const WINDUP_MS = 350;
-            const BURST_MS  = 1400;
-            let introStart  = null;
-            let pReqId      = null;
+            const BURST_MS = 1400;
+            let introStart = null;
+            let pReqId = null;
 
             function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
 
             function pResize() {
-                pW = pCanvas.width  = window.innerWidth;
+                pW = pCanvas.width = window.innerWidth;
                 pH = pCanvas.height = window.innerHeight;
                 pCx = pW / 2; pCy = pH / 2;
             }
@@ -400,7 +454,7 @@
                 spawnBurst() {
                     const u = Math.random(), v = Math.random();
                     const theta = 2 * Math.PI * u;
-                    const phi   = Math.acos(2 * v - 1);
+                    const phi = Math.acos(2 * v - 1);
                     const r = P_CFG.safeRadius + Math.pow(Math.random(), 0.6) * (P_CFG.boundary - P_CFG.safeRadius) * 0.55;
                     this.fx = r * Math.sin(phi) * Math.cos(theta);
                     this.fy = r * Math.sin(phi) * Math.sin(theta);
@@ -411,14 +465,14 @@
                     this.vy = (Math.random() - 0.5) * 0.35;
                     this.vz = (Math.random() - 0.5) * 0.35;
                     this._setAppearance();
-                    this.alpha   = 0;
+                    this.alpha = 0;
                     this.settled = false;
                 }
 
                 spawn() {
                     const u = Math.random(), v = Math.random();
                     const theta = 2 * Math.PI * u;
-                    const phi   = Math.acos(2 * v - 1);
+                    const phi = Math.acos(2 * v - 1);
                     const r = P_CFG.safeRadius + Math.pow(Math.random(), 0.6) * (P_CFG.boundary - P_CFG.safeRadius) * 0.55;
                     this.x = r * Math.sin(phi) * Math.cos(theta);
                     this.y = r * Math.sin(phi) * Math.sin(theta);
@@ -427,17 +481,17 @@
                     this.vy = (Math.random() - 0.5) * 0.35;
                     this.vz = (Math.random() - 0.5) * 0.35;
                     this._setAppearance();
-                    this.alpha   = Math.random();
+                    this.alpha = Math.random();
                     this.settled = true;
                 }
 
                 _setAppearance() {
-                    this.color     = P_COLORS[Math.floor(Math.random() * P_COLORS.length)];
-                    this.baseLen   = 3 + Math.random() * 3;
+                    this.color = P_COLORS[Math.floor(Math.random() * P_COLORS.length)];
+                    this.baseLen = 3 + Math.random() * 3;
                     this.baseThick = 2 + Math.random() * 1;
                     this.dashAngle = Math.random() * Math.PI;
-                    this.phase     = Math.random() * Math.PI * 2;
-                    this.phaseSpd  = 0.0015 + Math.random() * 0.0025;
+                    this.phase = Math.random() * Math.PI * 2;
+                    this.phaseSpd = 0.0015 + Math.random() * 0.0025;
                 }
 
                 update(now) {
@@ -446,7 +500,7 @@
                     if (this.settled) {
                         this.x += this.vx; this.y += this.vy; this.z += this.vz;
                         if (this.alpha < 1) this.alpha = Math.min(1, this.alpha + 0.015);
-                        const d = Math.sqrt(this.x**2 + this.y**2 + this.z**2);
+                        const d = Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
                         if (d > P_CFG.boundary) this.spawn();
                         return;
                     }
@@ -467,11 +521,11 @@
                     if (this.alpha < 0.01) return;
 
                     const cY = Math.cos(rY), sY = Math.sin(rY);
-                    const x1 =  this.x * cY - this.z * sY;
-                    const z1 =  this.z * cY + this.x * sY;
+                    const x1 = this.x * cY - this.z * sY;
+                    const z1 = this.z * cY + this.x * sY;
                     const cX = Math.cos(rX), sX = Math.sin(rX);
-                    const y1 =  this.y * cX - z1 * sX;
-                    const z2 =  z1 * cX + this.y * sX;
+                    const y1 = this.y * cX - z1 * sX;
+                    const z2 = z1 * cX + this.y * sX;
 
                     const scale = P_CFG.depth / (P_CFG.depth + z2);
                     if (scale < 0 || scale > 8) return;
@@ -483,11 +537,11 @@
                         (P_CFG.boundary * 0.9 - Math.abs(z2)) / (P_CFG.boundary * 0.9)
                     ));
                     const depthBright = Math.min(1, scale * 0.85 + 0.15);
-                    const breath      = 0.8 + Math.sin(this.phase) * 0.2;
-                    const finalAlpha  = this.alpha * depthFade * depthBright * breath;
+                    const breath = 0.8 + Math.sin(this.phase) * 0.2;
+                    const finalAlpha = this.alpha * depthFade * depthBright * breath;
                     if (finalAlpha < 0.02) return;
 
-                    const len   = this.baseLen   * breath * scale;
+                    const len = this.baseLen * breath * scale;
                     const thick = this.baseThick * scale;
                     if (len < 0.5) return;
 
@@ -495,16 +549,16 @@
                     pCtx.translate(sx, sy);
                     pCtx.rotate(this.dashAngle);
                     pCtx.globalAlpha = finalAlpha;
-                    pCtx.fillStyle   = this.color;
+                    pCtx.fillStyle = this.color;
 
                     const hw = len / 2, hh = Math.max(thick / 2, 0.6);
                     pCtx.beginPath();
                     if (hw > hh) {
                         pCtx.moveTo(-hw + hh, -hh);
-                        pCtx.lineTo( hw - hh, -hh);
-                        pCtx.arc( hw - hh, 0, hh, -Math.PI / 2,  Math.PI / 2);
+                        pCtx.lineTo(hw - hh, -hh);
+                        pCtx.arc(hw - hh, 0, hh, -Math.PI / 2, Math.PI / 2);
                         pCtx.lineTo(-hw + hh, hh);
-                        pCtx.arc(-hw + hh, 0, hh,  Math.PI / 2, -Math.PI / 2);
+                        pCtx.arc(-hw + hh, 0, hh, Math.PI / 2, -Math.PI / 2);
                     } else {
                         pCtx.arc(0, 0, hh, 0, Math.PI * 2);
                     }
@@ -518,7 +572,7 @@
 
             function pAnimate(now) {
                 if (!introStart) introStart = now;
-                
+
                 pCtx.clearRect(0, 0, pW, pH);
 
                 pRotY += P_CFG.rotSpeed;
@@ -531,14 +585,14 @@
             }
 
             window.particleSystem = {
-                hide: function() {
+                hide: function () {
                     if (pReqId) {
                         cancelAnimationFrame(pReqId);
                         pReqId = null;
                     }
                     pCtx.clearRect(0, 0, pW, pH);
                 },
-                burst: function() {
+                burst: function () {
                     if (!pReqId) {
                         introStart = null;
                         particles.forEach(p => p.spawnBurst());
@@ -551,4 +605,5 @@
         })();
     </script>
 </body>
+
 </html>
