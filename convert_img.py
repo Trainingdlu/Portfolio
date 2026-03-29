@@ -7,13 +7,18 @@ SOURCE_DIR = os.path.join(SCRIPT_DIR, 'img')
 QUALITY = 80 
 MAX_WIDTH = 1600
 FILE_PREFIX = "photo_"
+WHITELIST_FILES = {"favicon.png"}
 
 def main():
     if not os.path.exists(SOURCE_DIR):
         print(f"Error: Directory {SOURCE_DIR} not found.")
         return
 
-    files = sorted([f for f in os.listdir(SOURCE_DIR) if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+    files = sorted([
+        f for f in os.listdir(SOURCE_DIR)
+        if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+        and f.lower() not in WHITELIST_FILES
+    ])
 
     if not files:
         print("All images are already in WebP format.")

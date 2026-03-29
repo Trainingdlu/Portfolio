@@ -31,12 +31,16 @@
         :root {
             --shadow-normal: 0 4px 6px rgba(0, 0, 0, 0.05);
             --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.15);
+            --shadow-hero: 0 20px 36px rgba(11, 87, 208, 0.18);
+            --hero-border: rgba(11, 87, 208, 0.28);
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
                 --shadow-normal: 0 4px 6px rgba(0, 0, 0, 0.3);
                 --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.5);
+                --shadow-hero: 0 20px 36px rgba(0, 0, 0, 0.6);
+                --hero-border: rgba(138, 180, 248, 0.35);
             }
         }
 
@@ -67,6 +71,30 @@
             box-shadow: var(--shadow-normal);
             line-height: 0;
             display: block;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .photo-card.hero {
+            column-span: all;
+            border-radius: 24px;
+            border-color: var(--hero-border);
+            margin: 10px 0 28px;
+            box-shadow: var(--shadow-hero);
+        }
+
+        .photo-card.hero img {
+            width: 100%;
+            max-height: min(74vh, 780px);
+            object-fit: cover;
+        }
+
+        .photo-card.hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.2) 100%);
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -105,6 +133,17 @@
             .gallery-container {
                 column-count: 1;
             }
+
+            .photo-card.hero {
+                margin-bottom: 20px;
+                border-radius: 16px;
+                box-shadow: var(--shadow-normal);
+            }
+
+            .photo-card.hero img {
+                max-height: none;
+                object-fit: cover;
+            }
         }
     </style>
 </head>
@@ -122,17 +161,19 @@
 
     <main class="main-content">
         <div class="gallery-container">
+            <div class="photo-card"><img src="img/photo_3.webp" loading="eager" alt="Gallery 1"></div>
 
-            <div class="photo-card"><img src="img/avatar.webp" loading="eager" alt="Gallery 1"></div>
-            <div class="photo-card"><img src="img/photo_2.webp" loading="eager" alt="Gallery 2"></div>
-            <div class="photo-card"><img src="img/photo_3.webp" loading="eager" alt="Gallery 3"></div>
+            <div class="photo-card"><img src="img/avatar.webp" loading="eager" alt="Gallery 2"></div>
+            <div class="photo-card"><img src="img/photo_2.webp" loading="eager" alt="Gallery 3"></div>
             <div class="photo-card"><img src="img/photo_4.webp" loading="eager" alt="Gallery 4"></div>
-            <div class="photo-card"><img src="img/photo_5.webp" loading="eager" alt="Gallery 5"></div>
+            <div class="photo-card"><img src="img/photo_5.webp" loading="lazy" alt="Gallery 5"></div>
             <div class="photo-card"><img src="img/photo_6.webp" loading="lazy" alt="Gallery 6"></div>
             <div class="photo-card"><img src="img/photo_7.webp" loading="lazy" alt="Gallery 7"></div>
             <div class="photo-card"><img src="img/photo_8.webp" loading="lazy" alt="Gallery 8"></div>
             <div class="photo-card"><img src="img/photo_9.webp" loading="lazy" alt="Gallery 9"></div>
+
             <div class="photo-card"><img src="img/photo_10.webp" loading="lazy" alt="Gallery 10"></div>
+
             <div class="photo-card"><img src="img/photo_11.webp" loading="lazy" alt="Gallery 11"></div>
             <div class="photo-card"><img src="img/photo_12.webp" loading="lazy" alt="Gallery 12"></div>
             <div class="photo-card"><img src="img/photo_13.webp" loading="lazy" alt="Gallery 13"></div>
@@ -141,13 +182,15 @@
             <div class="photo-card"><img src="img/photo_16.webp" loading="lazy" alt="Gallery 16"></div>
             <div class="photo-card"><img src="img/photo_17.webp" loading="lazy" alt="Gallery 17"></div>
             <div class="photo-card"><img src="img/photo_18.webp" loading="lazy" alt="Gallery 18"></div>
-            <div class="photo-card"><img src="img/photo_19.webp" loading="lazy" alt="Gallery 19"></div>
-            <div class="photo-card"><img src="img/photo_20.webp" loading="lazy" alt="Gallery 20"></div>
-            <div class="photo-card"><img src="img/photo_21.webp" loading="lazy" alt="Gallery 21"></div>
-            <div class="photo-card"><img src="img/photo_22.webp" loading="lazy" alt="Gallery 22"></div>
-            <div class="photo-card"><img src="img/photo_23.webp" loading="lazy" alt="Gallery 23"></div>
-            <div class="photo-card"><img src="img/photo_24.webp" loading="lazy" alt="Gallery 24"></div>
-            <div class="photo-card"><img src="img/photo_25.webp" loading="lazy" alt="Gallery 25"></div>
+
+            <div class="photo-card"><img src="img/photo_25.webp" loading="lazy" alt="Gallery 19"></div>
+
+            <div class="photo-card"><img src="img/photo_19.webp" loading="lazy" alt="Gallery 20"></div>
+            <div class="photo-card"><img src="img/photo_20.webp" loading="lazy" alt="Gallery 21"></div>
+            <div class="photo-card"><img src="img/photo_21.webp" loading="lazy" alt="Gallery 22"></div>
+            <div class="photo-card"><img src="img/photo_22.webp" loading="lazy" alt="Gallery 23"></div>
+            <div class="photo-card"><img src="img/photo_23.webp" loading="lazy" alt="Gallery 24"></div>
+            <div class="photo-card"><img src="img/photo_24.webp" loading="lazy" alt="Gallery 25"></div>
             <div class="photo-card"><img src="img/photo_26.webp" loading="lazy" alt="Gallery 26"></div>
         </div>
     </main>
@@ -168,6 +211,29 @@
     </nav>
 
     <script>
+        const HERO_ENDINGS = new Set(['1', '3', '5']);
+
+        function applyHeroRhythm() {
+            const cards = document.querySelectorAll('.gallery-container .photo-card');
+            cards.forEach(card => {
+                card.classList.remove('hero');
+                const img = card.querySelector('img');
+                if (!img) return;
+
+                const src = img.getAttribute('src') || '';
+                const match = src.match(/photo_(\d+)\.webp$/i);
+                if (!match) return;
+
+                const photoNum = match[1];
+                const ending = photoNum[photoNum.length - 1];
+                if (HERO_ENDINGS.has(ending)) {
+                    card.classList.add('hero');
+                }
+            });
+        }
+
+        applyHeroRhythm();
+
         function clearActiveStates() {
             document.body.style.visibility = 'hidden';
             document.body.offsetHeight;
