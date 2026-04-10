@@ -148,7 +148,6 @@ body {
     .bottom-nav { display: flex; }
 }
 
-/* ===== Project Card Actions Mobile Fixes ===== */
 .card-actions {
     display: flex !important;
     flex-wrap: wrap !important;
