@@ -147,3 +147,33 @@ body {
     .topbar { display: none; }
     .bottom-nav { display: flex; }
 }
+
+/* ===== Project Card Actions Mobile Fixes ===== */
+.card-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+}
+
+.action-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 10px 14px !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    margin-left: 0 !important;
+}
+
+@media (max-width: 480px) {
+    .card-actions {
+        gap: 8px !important;
+    }
+
+    .action-btn {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+}
