@@ -65,9 +65,11 @@ body {
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-right: 24px;
+    margin-right: 32px;
     white-space: nowrap;
+}
+.logo-area > span:not(.material-symbols-outlined) {
+    font-family: 'Newsreader', serif;
 }
 .nav-item {
     display: flex;
